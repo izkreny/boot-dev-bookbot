@@ -2,9 +2,9 @@ def main():
     path = "books/frankenstein.txt"
     text = get_file_content(path)
     number_of_words = get_number_of_words(text)
-    characters = count_characters(text)
-    print(f"Text inside {path} file contains {number_of_words} number of words.")
-    print(f"Characters found: {characters}")
+    characters_dict = count_characters(text)
+    list_of_letters = convert_dict_to_list_of_dicts(characters_dict)
+    print_report(path, number_of_words, list_of_letters)
 
 
 def get_file_content(path):
@@ -53,5 +53,28 @@ def count_characters(string):
 
     return characters
 
+
+def convert_dict_to_list_of_dicts(dict):
+    list = []
+
+    for item in dict:
+        letter = item
+        letter_count = dict[item]
+        list_item = {"name": letter, "count": letter_count}
+        list.append(list_item)
+
+    return list
+
+
+def print_report(file, num_of_words, letters_list):
+    print(f"--- Begin report for {file} file ---")
+    print(f"{num_of_words} words found inside the file")
+    print("")
+
+    for letter in letters_list:
+        char = letter["name"]
+        count = letter["count"]
+        print(f"The '{char}' charachter was found {count} times")
+    print("--- End report ---")
 
 main()
