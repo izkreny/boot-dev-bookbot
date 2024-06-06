@@ -67,6 +67,8 @@ def convert_dict_to_list_of_dicts(dict):
 
 
 def print_report(file, num_of_words, letters_list):
+    letters_list.sort(reverse=True, key=lambda item: item["count"])
+
     print(f"--- Begin report for {file} file ---")
     print(f"{num_of_words} words found inside the file")
     print("")
